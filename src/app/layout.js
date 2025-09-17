@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,7 +24,70 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className={`flex flex-col min-h-screen`}>
+          {/* -------- Header -------- */}
+          <header className="w-full bg-orange-600 text-white shadow-md sticky top-0 z-50">
+            <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
+              {/* Logo */}
+              <Link
+                href="/"
+                className="flex items-center space-x-2 cursor-pointer"
+              >
+                <Image
+                  src="https://plus.unsplash.com/premium_photo-1726141641390-759f882219bf?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Z3ltJTIwbG9nb3xlbnwwfHwwfHx8MA%3D%3D"
+                  alt="Logo"
+                  width={50}
+                  height={50}
+                  className="rounded-full shadow"
+                  priority
+                />
+                <span className="text-3xl font-extrabold tracking-wide">
+                  <span className="text-orange-300">BEAST</span>{" "}
+                  <span className="text-orange-200">LIFE</span>
+                </span>
+              </Link>
+
+              {/* Navigation */}
+              <nav className="flex space-x-6 text-lg font-medium">
+                <Link
+                  href="/about"
+                  className="hover:text-orange-200 transition"
+                >
+                  About
+                </Link>
+                <Link
+                  href="/products"
+                  className="hover:text-orange-200 transition"
+                >
+                  Products
+                </Link>
+                <Link
+                  href="/contact"
+                  className="hover:text-orange-200 transition"
+                >
+                  Contact
+                </Link>
+              </nav>
+
+              {/* Sign In button */}
+              <div>
+                <button className="bg-white text-orange-700 font-semibold px-4 py-1 rounded-full shadow hover:bg-orange-100 transition">
+                  Sign In
+                </button>
+              </div>
+            </div>
+          </header>
+
+          {/* -------- Page Content -------- */}
+          <main className="flex-1">
+            {children}
+          </main>
+
+          {/* -------- Footer -------- */}
+          <footer className="bg-orange-600 text-white text-center py-4 text-sm mt-8">
+            © 2025 Beast Life. All Rights Reserved.
+          </footer>
+        </div>
       </body>
     </html>
   );

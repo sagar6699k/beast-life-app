@@ -1,103 +1,185 @@
+import { Inter, Poppins } from "next/font/google";
 import Image from "next/image";
+
+const inter = Inter({ subsets: ["latin"] });
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"], // semi-bold to extra-bold
+});
+
+
+// Gallery images
+const images = [
+  "https://plus.unsplash.com/premium_photo-1661301057249-bd008eebd06a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z3ltfGVufDB8fDB8fHww",
+  "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z3ltfGVufDB8fDB8fHww",
+  "https://plus.unsplash.com/premium_photo-1661265933107-85a5dbd815af?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Z3ltfGVufDB8fDB8fHww",
+  "https://images.unsplash.com/photo-1623874514711-0f321325f318?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Z3ltfGVufDB8fDB8fHww",
+  "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGd5bXxlbnwwfHwwfHx8MA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1670505062582-fdaa83c23c9e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGd5bXxlbnwwfHwwfHx8MA%3D%3D",
+];
+
+
+// Key features
+const features = [
+  {
+    title: "Premium Supplements",
+    desc: "Fuel your gains with science-backed, high-quality supplements.",
+    img: "https://images.unsplash.com/photo-1595257842044-8f021a58c8a0?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8d2hleSUyMHByb3RlaW58ZW58MHx8MHx8fDA%3D",
+  },
+  {
+    title: "Expert Training Plans",
+    desc: "Customized workout programs to help you hit your fitness goals.",
+    img: "https://plus.unsplash.com/premium_photo-1726328925629-0511220f27f1?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZXhwZXJ0JTIwZ3ltJTIwdHJhaW5lcnxlbnwwfHwwfHx8MA%3D%3D",
+  },
+  {
+    title: "Nutrition Guidance",
+    desc: "Personalized diet plans to match your body and performance needs.",
+    img: "https://images.unsplash.com/photo-1738523686578-f18348c8292b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZXhwZXJ0JTIwZ3ltJTIwdHJhaW5lcnxlbnwwfHwwfHx8MA%3D%3D",
+  },
+];
+
+// Popular products
+const products = [
+  {
+    name: "Whey Protein",
+    price: "$49.99",
+    img: "https://beastlife.in/cdn/shop/files/proseriesthumb.png?v=1720466031&width=900",
+  },
+  {
+    name: "Pre-Workout Formula",
+    price: "$29.99",
+    img: "https://beastlife.in/cdn/shop/files/isorich_53628675-215f-448b-92d6-6c99e3b56777.png?v=1728979747&width=900",
+  },
+  {
+    name: "Omega-3 Capsules",
+    price: "$19.99",
+    img: "https://beastlife.in/cdn/shop/files/isorich_53628675-215f-448b-92d6-6c99e3b56777.png?v=1728979747&width=900",
+  },
+  {
+    name: "Creatine Monohydrate",
+    price: "$24.99",
+    img: "https://beastlife.in/cdn/shop/files/Creatine.png?v=1715159786&width=900",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+  <div className={`flex flex-col min-h-screen ${inter.className}`}>
+      {/* Hero Section */}
+      <main className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-orange-50">
+        <h1
+          className={`${poppins.className} text-5xl font-extrabold text-orange-800 mb-4`}
+        >
+          Welcome to Beast Life
+        </h1>
+        <p className="text-lg text-orange-700 max-w-xl">
+          Your one-stop destination for fitness, nutrition, and high-quality
+          supplements. Train smart. Eat right. Live the Beast Life.
+        </p>
+        <button className="mt-6 bg-orange-600 text-white px-6 py-2 rounded-full shadow hover:bg-orange-700 transition">
+          Start Your Journey
+        </button>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      {/* Features Section */}
+      <section className="bg-white py-16 px-6">
+        <div className="max-w-7xl mx-auto text-center mb-10">
+          <h2 className="text-4xl font-bold text-orange-800">
+            Why Choose Beast Life
+          </h2>
+          <p className="text-orange-700 mt-2">
+            Build strength, eat clean, and achieve your goals with expert-backed
+            fitness solutions.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {features.map((feature, idx) => (
+            <div
+              key={idx}
+              className="bg-orange-50 rounded-xl shadow-md hover:shadow-lg transition overflow-hidden"
+            >
+              <Image
+                src={feature.img}
+                alt={feature.title}
+                width={400}
+                height={300}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6 text-center">
+                <h3 className="text-xl font-semibold text-orange-800">
+                  {feature.title}
+                </h3>
+                <p className="text-orange-700 mt-2">{feature.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Popular Products Section */}
+      <section className="bg-orange-50 py-16 px-6">
+        <div className="max-w-7xl mx-auto text-center mb-10">
+          <h2 className="text-4xl font-bold text-orange-800">
+            Popular Products
+          </h2>
+          <p className="text-orange-700 mt-2">
+            Shop our best-selling supplements trusted by athletes and fitness
+            enthusiasts.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-6 max-w-7xl mx-auto">
+          {products.map((product, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-xl shadow-md hover:shadow-lg transition overflow-hidden flex flex-col items-center p-4"
+            >
+              <Image
+                src={product.img}
+                alt={product.name}
+                width={300}
+                height={200}
+                className="rounded-lg mb-4 object-cover"
+              />
+              <h3 className="text-lg font-semibold text-orange-800">
+                {product.name}
+              </h3>
+              <p className="text-orange-600">{product.price}</p>
+              <button className="mt-4 bg-orange-600 text-white px-4 py-2 rounded-full shadow hover:bg-orange-700 transition">
+                Buy Now
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Gallery Section */} 
+      <section className="bg-orange-100 py-16 px-6">
+        <div className="max-w-7xl mx-auto text-center mb-10">
+          <h2 className="text-4xl font-bold text-orange-800">
+            Beast Life Gallery
+          </h2>
+          <p className="text-orange-700 mt-2">
+            A glimpse of the hard work, dedication, and results that define us.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-6 max-w-7xl mx-auto">
+          {images.map((img, idx) => (
+            <div
+              key={idx}
+              className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition"
+            >
+              <Image
+                src={img}
+                alt={`Gallery ${idx}`}
+                width={400}
+                height={300}
+                className="w-full h-48 object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
