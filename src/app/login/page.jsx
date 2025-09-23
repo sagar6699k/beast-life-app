@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react"; // Importing icons for a better password toggle
+import axiosInstance from "@/services/axiosInstance";
+import { setToken } from "@/utils/auth";
 
 /** Yup schema for login */
 const loginSchema = yup.object({
@@ -32,15 +34,20 @@ export default function Login() {
     mode: "onTouched",
   });
 
+  const loginUser = async (data) => {
+    const response = await axiosInstance.post("/api/auth/login", data);
+    return response.data; // { token, user }
+  };
+
   const onSubmit = async (data) => {
     try {
-      // TODO: call your auth API (e.g., /api/auth/login)
-      console.log("Login data:", data);
-      // simulate network delay
-      await new Promise((r) => setTimeout(r, 700));
-      setStatus("Logged in successfully (demo). Redirecting...");
+      const { token, user } = await loginUser(data);
+      setToken(token);
+
+      setStatus(`Welcome back, ${user.name}!`);
+      window.location.href = "/";
+
       reset();
-      // TODO: redirect to dashboard or intended page
     } catch (err) {
       console.error(err);
       setStatus("Login failed. Please check your credentials and try again.");
@@ -53,9 +60,8 @@ export default function Login() {
       <div
         className="relative hidden w-1/2 flex-col items-center justify-center bg-cover bg-center text-white md:flex"
         style={{
-          backgroundImage:
-            "url('/assets/loginBg1.jpg')",
-            opacity: 0.7,
+          backgroundImage: "url('/assets/loginBg1.jpg')",
+          opacity: 0.7,
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-orange-900 to-transparent opacity-80" />
@@ -93,7 +99,9 @@ export default function Login() {
                 {...register("email")}
                 type="email"
                 placeholder="Email address"
-                className={`rounded-md border ${errors.email ? "border-red-500" : "border-orange-300"}`}
+                className={`rounded-md border ${
+                  errors.email ? "border-red-500" : "border-orange-300"
+                }`}
                 aria-invalid={errors.email ? "true" : "false"}
               />
               {errors.email && (
@@ -112,7 +120,9 @@ export default function Login() {
                   {...register("password")}
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
-                  className={`rounded-md border pr-10 ${errors.password ? "border-red-500" : "border-orange-300"}`}
+                  className={`rounded-md border pr-10 ${
+                    errors.password ? "border-red-500" : "border-orange-300"
+                  }`}
                   aria-invalid={errors.password ? "true" : "false"}
                 />
                 <button
@@ -152,7 +162,10 @@ export default function Login() {
               </Button>
             </div>
             {status && (
-              <p className="mt-2 text-center text-sm text-green-600" role="status">
+              <p
+                className="mt-2 text-center text-sm text-green-600"
+                role="status"
+              >
                 {status}
               </p>
             )}
